@@ -1,0 +1,14 @@
+{:paths   ["src" "resources"]
+ :deps    {org.clojure/clojure                                 {:mvn/version "1.10.3"}
+           com.github.clj-easy/graal-build-time                {:mvn/version "0.1.4"}
+           com.github.clj-easy/graal-config-ring-jetty-adapter {:git/url   "https://github.com/clj-easy/graal-config"
+                                                                :git/sha   "479b7670efe413e51ccd561cda3e12875e854300"
+                                                                :deps/root "config/ring/ring-jetty-adapter"}
+           ring/ring                                           {:mvn/version "1.9.4"}}
+ :aliases {:uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.1.303"}}
+                     :exec-fn      hf.depstar/uberjar
+                     :exec-args    {:aot        ["example.core"]
+                                    :main-class "example.core"
+                                    :jar        "output.jar"
+                                    :jvm-opts   ["-Dclojure.compiler.direct-linking=true"
+                                                 "-Dclojure.spec.skip-macros=true"]}}}}
